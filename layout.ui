@@ -1,0 +1,78 @@
+<interface>
+  <object id="window" class="GtkWindow">
+    <property name="visible">True</property>
+    <property name="title">Chat</property>
+    <property name="border-width">10</property>
+    <child>
+      <object id="grid" class="GtkGrid">
+        <property name="visible">True</property>
+        <property name="row-spacing">5</property>
+        <property name="column-spacing">3</property>
+		<!-- <property name="expand">True</property>      does nothing? -->
+        <!-- <property name="hexpand-set">True</property> does nothing? -->
+        <child>
+          <object id="scrollable" class="GtkScrolledWindow">
+            <property name="visible">True</property>
+            <property name="expand">True</property>
+            <child>
+              <object id="transcript" class="GtkTextView">
+                <property name="visible">True</property>
+                <property name="expand">True</property>
+                <property name="wrap-mode">3</property>
+                <property name="editable">False</property>
+              </object>
+            </child>
+          </object>
+          <packing>
+            <property name="left-attach">0</property>
+            <property name="top-attach">0</property>
+            <property name="width">2</property>
+            <!-- can you set the height here in the packing? -->
+          </packing>
+        </child>
+        <!-- -->
+        <child>
+          <object id="sep" class="GtkSeparator">
+            <property name="visible">True</property>
+          </object>
+          <packing>
+            <property name="left-attach">0</property>
+            <property name="top-attach">1</property>
+            <property name="width">2</property>
+          </packing>
+        </child>
+        <!-- -->
+        <child>
+          <object id="message" class="GtkTextView">
+            <property name="visible">True</property>
+            <property name="wrap-mode">3</property>
+            <property name="accepts-tab">False</property>
+            <!-- <property name="expand">True</property> -->
+            <property name="hexpand">True</property>
+          </object>
+          <packing>
+            <property name="left-attach">0</property>
+            <property name="top-attach">2</property>
+          </packing>
+        </child>
+        <child>
+          <object id="send" class="GtkButton">
+            <property name="visible">True</property>
+            <property name="label">Send</property>
+          </object>
+          <packing>
+            <property name="left-attach">1</property>
+            <property name="top-attach">2</property>
+            <!-- <property name="width">2</property> -->
+          </packing>
+        </child>
+      </object>
+      <packing>
+      </packing>
+    </child>
+  </object>
+</interface>
+
+<!--
+  vim:expandtab:sw=2
+-->
