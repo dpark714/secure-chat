@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSC380 Computer Security Project - Spring 2024</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+        }
+        h1, h2, h3 {
+            color: #333;
+        }
+        p {
+            margin-bottom: 15px;
+        }
+        .authors {
+            margin-bottom: 30px;
+        }
+    </style>
+</head>
+<body>
+
+<h1>CSC380 Computer Security Project - Spring 2024</h1>
+<h2>Secure Chat Part 2</h2>
+
+<div class="authors">
+    <p>Prof. William Skeith</p>
+    <p>Dahyeon Park, Jiazhou Zhang</p>
+    <p>May 19th, 2024</p>
+</div>
+
+<h3>Assumptions</h3>
+<p>We assume that the communicating parties have already exchanged their public keys securely through an out-of-band mechanism. This means that before initiating any communication using the chat program, users must have a trusted method of sharing their public keys with each other to avoid the complexities and potential vulnerabilities associated with a public key infrastructure (PKI). The system also assumes that each party’s private keys and any derived session keys are securely stored and managed, preventing unauthorized access or leakage.</p>
+<p>Furthermore, it is assumed that the adversary has significant capabilities, including intercepting, modifying, or replaying messages exchanged between the communicating parties (Man-in-the-Middle attacks). The adversary has access to the network and can perform active attacks, such as injecting messages or impersonating a participant. However, it is also assumed that the adversary cannot break the cryptographic primitives (AES-256, HMAC-SHA-256, Diffie-Hellman key exchange) within a feasible time frame using current computational resources. The security of the random number generator used by the cryptographic library (OpenSSL) is also assumed to be strong and unpredictable.</p>
+
+<h3>Claims</h3>
+
+<p><strong>Integrity:</strong> Each message includes a Message Authentication Code (MAC) generated using HMAC-SHA-256. This ensures that any modification to the message during transit will be detected by the recipient. The integrity of the message is verified before decryption, preventing attacks that modify the ciphertext to induce predictable changes in the plaintext.</p>
+
+<p><strong>Confidentiality:</strong> In our code, all messages exchanged between the communicating parties are encrypted using AES-256 in CBC mode. This ensures that an adversary who intercepts the messages cannot read their contents. Session keys derived from the Diffie-Hellman key exchange are used for encryption. These keys provide perfect forward secrecy, meaning that if a session key is compromised, it does not affect the security of past sessions.</p>
+
+<p><strong>Mutual Authentication:</strong> Both communicating parties authenticate each other using their respective public keys. This prevents an adversary from impersonating one of the parties. The Diffie-Hellman key exchange ensures that both parties agree on a shared secret, which is used to derive session keys for encryption and MAC generation. This mutual agreement ensures that both parties are legitimate and in possession of their private keys.</p>
+
+<p><strong>In the case of malicious communicating party:</strong> As mentioned above, in the case of a malicious communication party performing a man-in-the-middle attack, they can decrypt, read, and modify messages. Hence, it would be good to integrate such as certificate verification to ensure the authenticity of public keys exchanged.</p>
+
+</body>
+</html>
